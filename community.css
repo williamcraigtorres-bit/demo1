@@ -296,6 +296,30 @@
   text-underline-offset: 3px;
 }
 
+.resend-button {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 11px 14px;
+  color: var(--green-dark);
+  background: #edf3ef;
+  border: 1px solid #c7d8ce;
+  border-radius: 5px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.resend-button:hover {
+  background: #e2eee7;
+  border-color: var(--green);
+}
+
+.resend-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
 .danger-text {
   color: var(--rust);
 }

@@ -39,6 +39,7 @@
   const authFormCopy = document.getElementById("auth-form-copy");
   const authSwitchPrompt = document.getElementById("auth-switch-prompt");
   const authSwitchButton = document.getElementById("auth-switch-button");
+  const resendConfirmationButton = document.getElementById("resend-confirmation");
 
   const playerPool = document.getElementById("player-pool");
   const rankingBlocks = document.getElementById("ranking-blocks");
@@ -79,11 +80,16 @@
         config.supabasePublishableKey
       )
     : null;
+  const authRedirectUrl = new URL(
+    "community.html",
+    config.siteUrl || window.location.href
+  ).href;
 
   let currentUser = null;
   let currentProfile = null;
   let draggedIndex = null;
   let builderSlugs = readDraft().playerSlugs;
+  let confirmationEmail = "";
 
   function escapeHtml(value) {
     return String(value ?? "")
@@ -166,6 +172,31 @@
   function setBusy(button, busy, busyLabel, normalLabel) {
     button.disabled = busy;
     button.textContent = busy ? busyLabel : normalLabel;
+  }
+
+  function getAuthReturn() {
+    const query = new URLSearchParams(window.location.search);
+    const hash = new URLSearchParams(window.location.hash.slice(1));
+    const error = query.get("error_description") || hash.get("error_description");
+    const completed =
+      query.has("code") ||
+      hash.has("access_token") ||
+      hash.get("type") === "signup";
+
+    return {
+      completed,
+      error: error || ""
+    };
+  }
+
+  function clearAuthReturn() {
+    if (!window.location.search && !window.location.hash) return;
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+
+  function offerConfirmationResend(email) {
+    confirmationEmail = email;
+    resendConfirmationButton.hidden = !email;
   }
 
   function readDraft() {
@@ -427,13 +458,19 @@
     setBusy(button, true, "Signing in...", "Sign in");
     setStatus(authStatus);
 
+    const email = document.getElementById("signin-email").value.trim();
     const { error } = await supabaseClient.auth.signInWithPassword({
-      email: document.getElementById("signin-email").value.trim(),
+      email,
       password: document.getElementById("signin-password").value
     });
 
     setBusy(button, false, "Signing in...", "Sign in");
-    if (error) setStatus(authStatus, readableError(error), "error");
+    if (error) {
+      setStatus(authStatus, readableError(error), "error");
+      if (/email not confirmed/i.test(error.message || "")) {
+        offerConfirmationResend(email);
+      }
+    }
   });
 
   signupForm.addEventListener("submit", async event => {
@@ -444,12 +481,13 @@
     setStatus(authStatus);
 
     const username = document.getElementById("signup-name").value.trim();
+    const email = document.getElementById("signup-email").value.trim();
     const { data, error } = await supabaseClient.auth.signUp({
-      email: document.getElementById("signup-email").value.trim(),
+      email,
       password: document.getElementById("signup-password").value,
       options: {
         data: { username },
-        emailRedirectTo: `${window.location.origin}${window.location.pathname}`
+        emailRedirectTo: authRedirectUrl
       }
     });
 
@@ -461,10 +499,41 @@
 
     signupForm.reset();
     if (data.session) {
+      offerConfirmationResend("");
       setStatus(authStatus, "Your account is ready.", "success");
     } else {
+      offerConfirmationResend(email);
       setStatus(authStatus, "Check your email and use the confirmation link to finish signing up.", "success");
     }
+  });
+
+  resendConfirmationButton.addEventListener("click", async () => {
+    if (!supabaseClient || !confirmationEmail) return;
+    setBusy(
+      resendConfirmationButton,
+      true,
+      "Sending...",
+      "Resend confirmation email"
+    );
+    setStatus(authStatus);
+
+    const { error } = await supabaseClient.auth.resend({
+      type: "signup",
+      email: confirmationEmail,
+      options: { emailRedirectTo: authRedirectUrl }
+    });
+
+    setBusy(
+      resendConfirmationButton,
+      false,
+      "Sending...",
+      "Resend confirmation email"
+    );
+    setStatus(
+      authStatus,
+      error ? readableError(error) : "A new confirmation email was sent. Use the newest link.",
+      error ? "error" : "success"
+    );
   });
 
   signoutButton.addEventListener("click", async () => {
@@ -682,6 +751,7 @@
   });
 
   async function initialize() {
+    const authReturn = getAuthReturn();
     const draft = readDraft();
     listTitle.value = draft.title;
     listDescription.value = draft.description;
@@ -700,6 +770,12 @@
 
     const { data } = await supabaseClient.auth.getSession();
     await updateAccount(data.session);
+    if (authReturn.error) {
+      setStatus(authStatus, authReturn.error, "error");
+    } else if (authReturn.completed && data.session) {
+      setStatus(authStatus, "Email confirmed. You are now signed in.", "success");
+    }
+    if (authReturn.error || authReturn.completed) clearAuthReturn();
     supabaseClient.auth.onAuthStateChange((_event, session) => {
       window.setTimeout(() => updateAccount(session), 0);
     });
