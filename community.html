@@ -30,72 +30,80 @@
   </header>
 
   <main>
-    <section class="community-intro">
-      <div>
-        <p class="section-label">Community rankings</p>
-        <h1>Build your football list.</h1>
-      </div>
-      <p>Choose the players, arrange the order, and publish your take for everyone to see.</p>
-    </section>
+    <div class="community-masthead">
+      <section class="community-intro">
+        <div>
+          <p class="section-label">Community rankings</p>
+          <h1>Build your football list.</h1>
+        </div>
+        <p>Choose the players, arrange the order, and publish your take for everyone to see.</p>
+      </section>
 
-    <div class="community-setup" id="setup-notice" hidden>
-      <strong>Community connection needed</strong>
-      <p>The page is ready. Add your Supabase project URL and publishable key to <code>supabase-config.js</code> to turn on accounts and publishing.</p>
-    </div>
-
-    <section class="account-band" aria-labelledby="account-title">
-      <div class="account-copy">
-        <p class="section-label">Your account</p>
-        <h2 id="account-title">Save and publish your rankings.</h2>
-        <p>Anyone can browse lists. Sign in when you want to publish one or send feedback.</p>
+      <div class="community-setup" id="setup-notice" hidden>
+        <strong>Community connection needed</strong>
+        <p>The page is ready. Add your Supabase project URL and publishable key to <code>supabase-config.js</code> to turn on accounts and publishing.</p>
       </div>
 
-      <div class="account-panel">
-        <div id="signed-out-view">
-          <div class="auth-tabs" role="tablist" aria-label="Account options">
-            <button class="auth-tab active" type="button" role="tab" aria-selected="true" data-auth-view="signin">Sign in</button>
-            <button class="auth-tab" type="button" role="tab" aria-selected="false" data-auth-view="signup">Create account</button>
+      <section class="account-band" aria-labelledby="account-title">
+        <div class="account-copy">
+          <p class="section-label">Your account</p>
+          <h2 id="account-title">Save and publish your rankings.</h2>
+          <p>Anyone can browse the lists. Members can publish rankings and send feedback.</p>
+        </div>
+
+        <div class="account-panel">
+          <div id="signed-out-view">
+            <div class="auth-heading">
+              <p class="auth-label">Member access</p>
+              <h3 id="auth-form-title">Welcome back</h3>
+              <p id="auth-form-copy">Continue building your all-time ranking.</p>
+            </div>
+
+            <form class="auth-form" id="signin-form">
+              <label>
+                <span>Email</span>
+                <input id="signin-email" type="email" autocomplete="email" required>
+              </label>
+              <label>
+                <span>Password</span>
+                <input id="signin-password" type="password" autocomplete="current-password" minlength="6" required>
+              </label>
+              <button class="primary-button" type="submit">Sign in</button>
+            </form>
+
+            <form class="auth-form" id="signup-form" hidden>
+              <label>
+                <span>Display name</span>
+                <input id="signup-name" type="text" autocomplete="nickname" minlength="2" maxlength="30" required>
+              </label>
+              <label>
+                <span>Email</span>
+                <input id="signup-email" type="email" autocomplete="email" required>
+              </label>
+              <label>
+                <span>Password</span>
+                <input id="signup-password" type="password" autocomplete="new-password" minlength="8" required>
+              </label>
+              <button class="primary-button" type="submit">Create account</button>
+            </form>
+
+            <div class="auth-switch-row">
+              <span id="auth-switch-prompt">New to The Football 50?</span>
+              <button class="text-button" id="auth-switch-button" type="button" data-auth-view="signup">Create account</button>
+            </div>
           </div>
 
-          <form class="auth-form" id="signin-form">
-            <label>
-              <span>Email</span>
-              <input id="signin-email" type="email" autocomplete="email" required>
-            </label>
-            <label>
-              <span>Password</span>
-              <input id="signin-password" type="password" autocomplete="current-password" minlength="6" required>
-            </label>
-            <button class="primary-button" type="submit">Sign in</button>
-          </form>
+          <div class="signed-in-view" id="signed-in-view" hidden>
+            <span class="account-label">Signed in as</span>
+            <strong id="account-name">Football fan</strong>
+            <span id="account-email"></span>
+            <button class="text-button" id="signout-button" type="button">Sign out</button>
+          </div>
 
-          <form class="auth-form" id="signup-form" hidden>
-            <label>
-              <span>Display name</span>
-              <input id="signup-name" type="text" autocomplete="nickname" minlength="2" maxlength="30" required>
-            </label>
-            <label>
-              <span>Email</span>
-              <input id="signup-email" type="email" autocomplete="email" required>
-            </label>
-            <label>
-              <span>Password</span>
-              <input id="signup-password" type="password" autocomplete="new-password" minlength="8" required>
-            </label>
-            <button class="primary-button" type="submit">Create account</button>
-          </form>
+          <p class="form-status" id="auth-status" aria-live="polite"></p>
         </div>
-
-        <div class="signed-in-view" id="signed-in-view" hidden>
-          <span class="account-label">Signed in as</span>
-          <strong id="account-name">Football fan</strong>
-          <span id="account-email"></span>
-          <button class="text-button" id="signout-button" type="button">Sign out</button>
-        </div>
-
-        <p class="form-status" id="auth-status" aria-live="polite"></p>
-      </div>
-    </section>
+      </section>
+    </div>
 
     <section class="builder-section" id="list-builder" aria-labelledby="builder-title">
       <div class="builder-heading">

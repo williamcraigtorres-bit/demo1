@@ -35,7 +35,10 @@
   const signinForm = document.getElementById("signin-form");
   const signupForm = document.getElementById("signup-form");
   const signoutButton = document.getElementById("signout-button");
-  const authTabs = [...document.querySelectorAll(".auth-tab")];
+  const authFormTitle = document.getElementById("auth-form-title");
+  const authFormCopy = document.getElementById("auth-form-copy");
+  const authSwitchPrompt = document.getElementById("auth-switch-prompt");
+  const authSwitchButton = document.getElementById("auth-switch-button");
 
   const playerPool = document.getElementById("player-pool");
   const rankingBlocks = document.getElementById("ranking-blocks");
@@ -198,11 +201,15 @@
     const showSignIn = view === "signin";
     signinForm.hidden = !showSignIn;
     signupForm.hidden = showSignIn;
-    authTabs.forEach(tab => {
-      const active = tab.dataset.authView === view;
-      tab.classList.toggle("active", active);
-      tab.setAttribute("aria-selected", String(active));
-    });
+    authFormTitle.textContent = showSignIn ? "Welcome back" : "Join the community";
+    authFormCopy.textContent = showSignIn
+      ? "Continue building your all-time ranking."
+      : "Create an account to publish your own lists.";
+    authSwitchPrompt.textContent = showSignIn
+      ? "New to The Football 50?"
+      : "Already have an account?";
+    authSwitchButton.textContent = showSignIn ? "Create account" : "Sign in";
+    authSwitchButton.dataset.authView = showSignIn ? "signup" : "signin";
     setStatus(authStatus);
   }
 
@@ -409,8 +416,8 @@
     setStatus(feedStatus);
   }
 
-  authTabs.forEach(tab => {
-    tab.addEventListener("click", () => switchAuthView(tab.dataset.authView));
+  authSwitchButton.addEventListener("click", () => {
+    switchAuthView(authSwitchButton.dataset.authView);
   });
 
   signinForm.addEventListener("submit", async event => {
