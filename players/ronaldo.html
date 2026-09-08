@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cristiano Ronaldo Profile</title>
+  <link rel="stylesheet" href="../style.css">
+  
+  <style>
+    
+    .section-intro {
+  margin: -8px 0 22px;
+  color: #66706b;
+}
+
+.ronaldo-trophies {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.trophy-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 74px;
+  padding: 14px;
+  background: #f3f5f2;
+  border: 1px solid #dde3df;
+  border-left: 4px solid #c89b2c;
+  border-radius: 7px;
+  font-weight: 800;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.trophy-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(16, 37, 28, 0.15);
+}
+
+.trophy-card.important {
+  background: #fff8dd;
+  border-left-color: #e2b51f;
+}
+
+.trophy-card.international {
+  background: #eef7f2;
+  border-left-color: #0b7a53;
+}
+
+.trophy-count {
+  display: grid;
+  place-items: center;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  background: #10251c;
+  color: #f2c94c;
+  border-radius: 50%;
+  font-size: 19px;
+}
+
+.stats-note {
+  margin-top: 14px;
+  color: #66706b;
+  font-size: 13px;
+}
+
+.video-card h3 {
+  margin: 14px 14px 5px;
+}
+
+.video-card p {
+  margin: 0 14px 16px;
+  color: #66706b;
+}
+
+.highlight-search {
+  display: flex;
+  min-height: 135px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+  background: #10251c;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.highlight-search:hover {
+  transform: translateY(-4px);
+  background: #0b7a53;
+}
+
+.highlight-search strong {
+  color: #f2c94c;
+  font-size: 21px;
+}
+
+@media (max-width: 800px) {
+  .ronaldo-trophies {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .ronaldo-trophies {
+    grid-template-columns: 1fr;
+  }
+}
+    .profile-page {
+      background: #f3f5f2;
+      min-height: 100vh;
+    }
+
+    .profile-hero {
+      min-height: 75vh;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: end;
+      gap: 36px;
+      padding: 42px;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(3, 24, 18, 0.92), rgba(3, 24, 18, 0.45)),
+        url("../Messi.webp");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: #f2c94c;
+      font-weight: 800;
+      text-decoration: none;
+      margin-bottom: 28px;
+    }
+
+    .profile-rank {
+      display: inline-block;
+      background: #f2c94c;
+      color: #10251c;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .profile-hero h1 {
+      font-size: 72px;
+      line-height: 0.95;
+      margin: 0 0 18px;
+    }
+
+    .profile-summary {
+      max-width: 660px;
+      font-size: 21px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .hero-details {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-details p {
+      margin: 12px 0;
+      font-size: 18px;
+    }
+
+    .profile-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 42px 24px 70px;
+    }
+
+    .section {
+      background: white;
+      border-radius: 8px;
+      padding: 28px;
+      margin-bottom: 26px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .section h2 {
+      margin: 0 0 18px;
+      font-size: 30px;
+    }
+
+    .section p,
+    .section li {
+      color: #444;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .facts-grid,
+    .stats-grid,
+    .skills-grid,
+    .videos-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .facts-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .fact,
+    .stat,
+    .skill {
+      background: #f3f5f2;
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .fact span,
+    .stat span {
+      display: block;
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 6px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .fact strong,
+    .stat strong {
+      color: #111;
+      font-size: 22px;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat strong {
+      color: #0b5a3c;
+      font-size: 34px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .club-row {
+      display: grid;
+      grid-template-columns: 180px 1fr 160px;
+      gap: 16px;
+      align-items: center;
+      padding: 16px;
+      background: #f3f5f2;
+      border-radius: 8px;
+    }
+
+    .club-row strong {
+      font-size: 20px;
+    }
+
+    .club-row span {
+      color: #555;
+    }
+
+    .trophy-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .trophy-list li {
+      background: #f3f5f2;
+      padding: 14px 16px;
+      border-left: 5px solid #f2c94c;
+      border-radius: 6px;
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .skill strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #0b5a3c;
+      font-size: 19px;
+    }
+
+    .moments {
+      display: grid;
+      gap: 14px;
+    }
+
+    .moment {
+      padding: 16px;
+      border-left: 5px solid #0b5a3c;
+      background: #f3f5f2;
+      border-radius: 6px;
+    }
+
+    .videos-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    iframe {
+      width: 100%;
+      height: 315px;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .profile-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .profile-nav a {
+      background: #0b5a3c;
+      color: white;
+      text-decoration: none;
+      padding: 14px 18px;
+      border-radius: 7px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 900px) {
+      .profile-hero {
+        grid-template-columns: 1fr;
+        padding: 32px 22px;
+      }
+
+      .profile-hero h1 {
+        font-size: 48px;
+      }
+
+      .facts-grid,
+      .stats-grid,
+      .skills-grid,
+      .videos-grid,
+      .trophy-list {
+        grid-template-columns: 1fr;
+      }
+
+      .club-row {
+        grid-template-columns: 1fr;
+      }
+    }
+    .trophy-cabinet {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #111;
+}
+
+.trophy-cabinet img {
+  width: 100%;
+  display: block;
+}
+
+.trophy-spot {
+  position: absolute;
+  border: 2px solid transparent;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.trophy-spot:hover {
+  border-color: #f2c94c;
+  background: rgba(242, 201, 76, 0.18);
+  box-shadow: 0 0 24px rgba(242, 201, 76, 0.9);
+}
+
+.trophy-spot::after {
+  content: attr(data-trophy);
+  position: absolute;
+  left: 50%;
+  bottom: 105%;
+  transform: translateX(-50%);
+  background: #10251c;
+  color: white;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.trophy-spot:hover::after {
+  opacity: 1;
+}
+.scorecard {
+  display: grid;
+  gap: 16px;
+}
+
+.score-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 70px;
+  gap: 14px;
+  align-items: center;
+  background: #f3f5f2;
+  padding: 14px;
+  border-radius: 8px;
+}
+
+.score-row span {
+  font-weight: 800;
+}
+
+.score-row strong {
+  color: #0b5a3c;
+}
+
+.score-bar {
+  height: 12px;
+  background: #dce5df;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.score-bar div {
+  height: 100%;
+  background: linear-gradient(90deg, #0b5a3c, #f2c94c);
+  border-radius: 999px;
+}
+
+@media (max-width: 700px) {
+  .score-row {
+    grid-template-columns: 1fr;
+  }
+}
+  </style>
+  <link rel="stylesheet" href="../profile.css">
+</head>
+<body class="profile-page ronaldo-profile">
+
+  <header class="profile-hero" style="background-image: linear-gradient(90deg, rgba(3, 24, 18, 0.42), rgba(3, 24, 18, 0.96)), url('../Ronaldo.png');">
+    <div>
+      <a class="back-link" href="../index.html">← Back to Top 50</a>
+      <div class="profile-rank">#2</div>
+      <h1>Cristiano Ronaldo</h1>
+      <p class="profile-summary">
+        Cristiano Ronaldo is one of football's greatest goalscorers, famous for his
+        athleticism, finishing, heading, leadership, and unmatched winning mentality.
+      </p>
+    </div>
+
+    <div class="hero-details">
+      <p><strong>Country:</strong> Portugal</p>
+      <p><strong>Position:</strong> Forward</p>
+      <p><strong>Main Clubs:</strong> Manchester United, Real Madrid, Juventus</p>
+      <p><strong>Era:</strong> 2002-present</p>
+      <p><strong>Known For:</strong> Goals, heading, power, movement, mentality</p>
+    </div>
+  </header>
+
+  <main class="profile-content">
+
+    <div class="profile-overview">
+      <div class="profile-overview-main">
+
+    <section class="section">
+      <h2>Quick Facts</h2>
+
+      <div class="facts-grid">
+        <div class="fact"><span>Full Name</span><strong>Cristiano Ronaldo dos Santos Aveiro</strong></div>
+        <div class="fact"><span>Born</span><strong>February 5, 1985</strong></div>
+        <div class="fact"><span>Birthplace</span><strong>Funchal, Madeira</strong></div>
+        <div class="fact"><span>Height</span><strong>1.87 m</strong></div>
+        <div class="fact"><span>Position</span><strong>Forward</strong></div>
+        <div class="fact"><span>Preferred Foot</span><strong>Right</strong></div>
+        <div class="fact"><span>Famous Number</span><strong>7</strong></div>
+        <div class="fact"><span>National Team</span><strong>Portugal</strong></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Career Story</h2>
+
+      <p>
+        Cristiano Ronaldo began his professional career with Sporting CP in
+        Portugal. His speed, dribbling and confidence quickly attracted the
+        attention of Manchester United and Sir Alex Ferguson.
+      </p>
+
+      <p>
+        At Manchester United, Ronaldo developed from an exciting winger into
+        one of the world's most dangerous goalscorers. He won three Premier
+        League titles, the Champions League and his first Ballon d'Or.
+      </p>
+
+      <p>
+        Ronaldo joined Real Madrid in 2009 and became the club's all-time
+        leading goalscorer. He scored 450 competitive goals in 438 appearances
+        while winning four more Champions League titles with the club.
+      </p>
+
+      <p>
+        He later won trophies with Juventus, returned to Manchester United and
+        continued his career with Al-Nassr. For Portugal, he helped win UEFA
+        Euro 2016 and two UEFA Nations League titles.
+      </p>
+    </section>
+
+      </div>
+
+      <aside class="profile-side-photos" aria-label="Cristiano Ronaldo photos">
+        <figure class="profile-side-photo">
+          <img src="../Ronaldo2.png" alt="Cristiano Ronaldo career moment" loading="lazy">
+        </figure>
+        <figure class="profile-side-photo">
+          <img src="../Ronaldo3.png" alt="Cristiano Ronaldo playing football" loading="lazy">
+        </figure>
+      </aside>
+    </div>
+
+    <section class="section">
+      <h2>Club History</h2>
+
+      <div class="timeline">
+        <div class="club-row">
+          <strong>Sporting CP</strong>
+          <span>His professional beginning in Portugal, where his speed and skill first stood out.</span>
+          <span>2002–2003</span>
+        </div>
+
+        <div class="club-row">
+          <strong>Manchester United</strong>
+          <span>Developed from an exciting winger into a Ballon d'Or-winning superstar.</span>
+          <span>2003–2009</span>
+        </div>
+
+        <div class="club-row">
+          <strong>Real Madrid</strong>
+          <span>Became the club's record goalscorer and won four Champions League titles.</span>
+          <span>2009–2018</span>
+        </div>
+
+        <div class="club-row">
+          <strong>Juventus</strong>
+          <span>Continued his goalscoring dominance and won major trophies in Italy.</span>
+          <span>2018–2021</span>
+        </div>
+
+        <div class="club-row">
+          <strong>Manchester United</strong>
+          <span>Returned to Old Trafford and delivered more memorable goals.</span>
+          <span>2021–2022</span>
+        </div>
+
+        <div class="club-row">
+          <strong>Al-Nassr</strong>
+          <span>Brought global attention to Saudi football while extending his scoring records.</span>
+          <span>2023–Present</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Stats and Records</h2>
+
+      <div class="stats-grid">
+        <div class="stat">
+          <span>Official Senior Goals</span>
+          <strong>976</strong>
+        </div>
+
+        <div class="stat">
+          <span>Champions League Titles</span>
+          <strong>5</strong>
+        </div>
+
+        <div class="stat">
+          <span>Portugal Appearances</span>
+          <strong>233</strong>
+        </div>
+
+        <div class="stat">
+          <span>Ballon d'Or Awards</span>
+          <strong>5</strong>
+        </div>
+      </div>
+
+      <p class="stats-note">
+        Official senior club and senior international goals. Youth, exhibition, and unofficial matches are excluded. Total checked on August 1, 2026.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Trophy Cabinet</h2>
+      <p class="section-intro">34 team trophies across 17 competitions.</p>
+
+      <div class="ronaldo-trophies">
+        <div class="trophy-card"><span class="trophy-count">1</span><span>Portuguese Super Cup</span></div>
+        <div class="trophy-card"><span class="trophy-count">3</span><span>Premier League</span></div>
+        <div class="trophy-card"><span class="trophy-count">1</span><span>FA Cup</span></div>
+        <div class="trophy-card"><span class="trophy-count">2</span><span>English League Cup</span></div>
+        <div class="trophy-card"><span class="trophy-count">1</span><span>Community Shield</span></div>
+        <div class="trophy-card important"><span class="trophy-count">5</span><span>Champions League</span></div>
+        <div class="trophy-card"><span class="trophy-count">4</span><span>FIFA Club World Cup</span></div>
+        <div class="trophy-card"><span class="trophy-count">2</span><span>La Liga</span></div>
+        <div class="trophy-card"><span class="trophy-count">2</span><span>Copa del Rey</span></div>
+        <div class="trophy-card"><span class="trophy-count">2</span><span>Spanish Super Cup</span></div>
+        <div class="trophy-card"><span class="trophy-count">2</span><span>UEFA Super Cup</span></div>
+        <div class="trophy-card"><span class="trophy-count">2</span><span>Serie A</span></div>
+        <div class="trophy-card"><span class="trophy-count">1</span><span>Coppa Italia</span></div>
+        <div class="trophy-card"><span class="trophy-count">2</span><span>Italian Super Cup</span></div>
+        <div class="trophy-card"><span class="trophy-count">1</span><span>Arab Club Champions Cup</span></div>
+        <div class="trophy-card international"><span class="trophy-count">1</span><span>European Championship</span></div>
+        <div class="trophy-card international"><span class="trophy-count">2</span><span>UEFA Nations League</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Signature Skills</h2>
+
+      <div class="skills-grid">
+        <div class="skill"><strong>Finishing</strong><p>Powerful and accurate with either foot.</p></div>
+        <div class="skill"><strong>Heading</strong><p>Extraordinary jumping ability and timing.</p></div>
+        <div class="skill"><strong>Movement</strong><p>Finds space inside the penalty area.</p></div>
+        <div class="skill"><strong>Long Shots</strong><p>Capable of scoring from great distances.</p></div>
+        <div class="skill"><strong>Speed</strong><p>Explosive acceleration during his prime.</p></div>
+        <div class="skill"><strong>Mentality</strong><p>Relentless determination and confidence.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Iconic Moments</h2>
+
+      <div class="moments">
+        <article class="moment">
+          <strong>2008 Champions League Final</strong>
+          <p>Scored in the final as Manchester United became European champions.</p>
+        </article>
+
+        <article class="moment">
+          <strong>Real Madrid's Record Goalscorer</strong>
+          <p>Became the leading goalscorer in the history of Real Madrid.</p>
+        </article>
+
+        <article class="moment">
+          <strong>2016 European Championship</strong>
+          <p>Captained Portugal to its first major international trophy.</p>
+        </article>
+
+        <article class="moment">
+          <strong>Hat-Trick Against Spain</strong>
+          <p>Scored three goals in Portugal's dramatic 2018 World Cup match.</p>
+        </article>
+
+        <article class="moment">
+          <strong>Bicycle Kick Against Juventus</strong>
+          <p>Produced one of the most famous goals in Champions League history.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>YouTube Highlights</h2>
+
+      <div class="videos-grid">
+        <article class="video-card">
+          <iframe
+            src="https://www.youtube.com/embed/5hFd6zGkxLE"
+            title="Cristiano Ronaldo Real Madrid highlights"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+
+          <h3>Thank You, Cristiano Ronaldo</h3>
+          <p>Official Real Madrid career tribute.</p>
+        </article>
+
+        <a
+          class="highlight-search"
+          href="https://www.youtube.com/results?search_query=Cristiano+Ronaldo+best+goals+official"
+          target="_blank"
+          rel="noopener"
+        >
+          <strong>Best Goals</strong>
+          <span>Watch more highlights on YouTube →</span>
+        </a>
+
+        <a
+          class="highlight-search"
+          href="https://www.youtube.com/results?search_query=Cristiano+Ronaldo+Portugal+highlights+official"
+          target="_blank"
+          rel="noopener"
+        >
+          <strong>Portugal Highlights</strong>
+          <span>Watch his international highlights →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Why He Ranks #2 All Time</h2>
+
+      <p>
+        Cristiano Ronaldo combines incredible goalscoring, longevity,
+        athleticism and a legendary winning mentality. He succeeded in
+        England, Spain, Italy, Europe and international football while breaking
+        records that may stand for generations.
+      </p>
+
+      <p>
+        His ability to continuously reinvent himself—from a skillful winger
+        into one of football's greatest goalscorers—is what makes him my
+        second-greatest player of all time.
+      </p>
+    </section>
+
+    <nav class="profile-nav">
+      <a href="messi.html">← #1 Lionel Messi</a>
+      <a href="../index.html">View All Players</a>
+      <a href="maradona.html">#3 Diego Maradona →</a>
+    </nav>
+
+  </main>
+
+  <script src="../profile.js"></script>
+</body>
+</html>

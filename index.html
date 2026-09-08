@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="An all-time ranking of the 50 greatest football players."
+  >
+  <title>The Football 50 | Greatest Players of All Time</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="home-page">
+  <a class="skip-link" href="#ranking">Skip to the ranking</a>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="index.html" aria-label="The Football 50 home">
+        <span class="brand-number">50</span>
+        <span class="brand-copy">
+          <strong>The Football</strong>
+          <small>All-time ranking</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="#ranking">Ranking</a>
+        <a href="community.html">Community</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-media" aria-hidden="true">
+        <img src="Messi.webp" alt="">
+        <img src="Ronaldo.png" alt="">
+        <img src="Maradona.jpg" alt="">
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <p class="kicker">All-time ranking</p>
+        <h1 id="page-title">The 50 greatest footballers, ranked.</h1>
+        <p class="hero-subtitle">
+          Fifty careers. Every era. One list shaped by peak level,
+          longevity, influence, and the moments that changed the game.
+        </p>
+        <a class="hero-jump" href="#ranking">Explore the ranking <span aria-hidden="true">&darr;</span></a>
+      </div>
+    </section>
+
+    <section class="ranking-section" id="ranking" aria-labelledby="ranking-title">
+      <div class="ranking-intro">
+        <div>
+          <p class="section-label">Ranks 1-50</p>
+          <h2 id="ranking-title">The full list</h2>
+        </div>
+        <p>Icons, innovators, champions, and artists from across football history.</p>
+      </div>
+
+      <div class="ranking-tools">
+        <div class="search-control">
+          <label class="sr-only" for="search">Search the player ranking</label>
+          <input
+            type="search"
+            id="search"
+            placeholder="Search player, country, or position"
+            autocomplete="off"
+          >
+          <button
+            class="clear-search"
+            id="clear-search"
+            type="button"
+            aria-label="Clear search"
+            title="Clear search"
+            hidden
+          >&times;</button>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter by position">
+          <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter-btn" type="button" data-filter="Forward" aria-pressed="false">Forwards</button>
+          <button class="filter-btn" type="button" data-filter="Midfielder" aria-pressed="false">Midfielders</button>
+          <button class="filter-btn" type="button" data-filter="Defender" aria-pressed="false">Defenders</button>
+          <button class="filter-btn" type="button" data-filter="Goalkeeper" aria-pressed="false">Goalkeepers</button>
+        </div>
+
+        <label class="sort-control">
+          <span>Order</span>
+          <select id="sort">
+            <option value="rank">Ranking</option>
+            <option value="name">Player name</option>
+            <option value="country">Country</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="results-bar">
+        <p id="result-summary" aria-live="polite">
+          <strong id="player-count">50</strong><span id="result-copy"> of 50 players</span>
+        </p>
+        <button id="reset-filters" class="reset-filters" type="button" hidden>Reset filters</button>
+      </div>
+
+      <div class="players" id="players"></div>
+
+      <div id="no-results" class="no-results" hidden>
+        <p class="section-label">No matches</p>
+        <h3>No players found</h3>
+        <p>Try a different name, country, or position.</p>
+        <button id="empty-reset" type="button">Reset filters</button>
+      </div>
+    </section>
+
+    <section class="about-section" id="about" aria-labelledby="about-title">
+      <div>
+        <p class="section-label">About the list</p>
+        <h2 id="about-title">One fan's football history.</h2>
+      </div>
+      <p>
+        This all-time ranking is not a formula. Peak ability matters,
+        but so do longevity, influence, trophies, and what each player
+        made people feel when the ball arrived at their feet.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>The Football 50</strong>
+      <span>All-time ranking.</span>
+    </div>
+    <a href="#page-title">Back to top <span aria-hidden="true">&uarr;</span></a>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top" title="Back to top">
+    &uarr;
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>

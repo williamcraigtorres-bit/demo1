@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build and publish your own all-time football ranking with The Football 50 community.">
+  <title>Community Lists | The Football 50</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="community.css">
+</head>
+<body class="community-page">
+  <a class="skip-link" href="#list-builder">Skip to the list builder</a>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="site-brand" href="index.html" aria-label="The Football 50 home">
+        <span class="brand-number">50</span>
+        <span class="brand-copy">
+          <strong>The Football</strong>
+          <small>All-time ranking</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html#ranking">Ranking</a>
+        <a href="community.html" aria-current="page">Community</a>
+        <a href="index.html#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="community-intro">
+      <div>
+        <p class="section-label">Community rankings</p>
+        <h1>Build your football list.</h1>
+      </div>
+      <p>Choose the players, arrange the order, and publish your take for everyone to see.</p>
+    </section>
+
+    <div class="community-setup" id="setup-notice" hidden>
+      <strong>Community connection needed</strong>
+      <p>The page is ready. Add your Supabase project URL and publishable key to <code>supabase-config.js</code> to turn on accounts and publishing.</p>
+    </div>
+
+    <section class="account-band" aria-labelledby="account-title">
+      <div class="account-copy">
+        <p class="section-label">Your account</p>
+        <h2 id="account-title">Save and publish your rankings.</h2>
+        <p>Anyone can browse lists. Sign in when you want to publish one or send feedback.</p>
+      </div>
+
+      <div class="account-panel">
+        <div id="signed-out-view">
+          <div class="auth-tabs" role="tablist" aria-label="Account options">
+            <button class="auth-tab active" type="button" role="tab" aria-selected="true" data-auth-view="signin">Sign in</button>
+            <button class="auth-tab" type="button" role="tab" aria-selected="false" data-auth-view="signup">Create account</button>
+          </div>
+
+          <form class="auth-form" id="signin-form">
+            <label>
+              <span>Email</span>
+              <input id="signin-email" type="email" autocomplete="email" required>
+            </label>
+            <label>
+              <span>Password</span>
+              <input id="signin-password" type="password" autocomplete="current-password" minlength="6" required>
+            </label>
+            <button class="primary-button" type="submit">Sign in</button>
+          </form>
+
+          <form class="auth-form" id="signup-form" hidden>
+            <label>
+              <span>Display name</span>
+              <input id="signup-name" type="text" autocomplete="nickname" minlength="2" maxlength="30" required>
+            </label>
+            <label>
+              <span>Email</span>
+              <input id="signup-email" type="email" autocomplete="email" required>
+            </label>
+            <label>
+              <span>Password</span>
+              <input id="signup-password" type="password" autocomplete="new-password" minlength="8" required>
+            </label>
+            <button class="primary-button" type="submit">Create account</button>
+          </form>
+        </div>
+
+        <div class="signed-in-view" id="signed-in-view" hidden>
+          <span class="account-label">Signed in as</span>
+          <strong id="account-name">Football fan</strong>
+          <span id="account-email"></span>
+          <button class="text-button" id="signout-button" type="button">Sign out</button>
+        </div>
+
+        <p class="form-status" id="auth-status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="builder-section" id="list-builder" aria-labelledby="builder-title">
+      <div class="builder-heading">
+        <div>
+          <p class="section-label">List builder</p>
+          <h2 id="builder-title">Make your own ranking</h2>
+        </div>
+        <p><strong id="builder-count">0</strong> players selected</p>
+      </div>
+
+      <div class="list-details">
+        <label>
+          <span>List title</span>
+          <input id="list-title" type="text" maxlength="80" placeholder="My greatest players of all time">
+        </label>
+        <label>
+          <span>Short description</span>
+          <textarea id="list-description" maxlength="400" rows="3" placeholder="What matters most in your ranking?"></textarea>
+        </label>
+      </div>
+
+      <div class="builder-workspace">
+        <div class="player-picker">
+          <div class="workspace-title">
+            <h3>Player pool</h3>
+            <button class="text-button" id="add-all-button" type="button">Add all 50</button>
+          </div>
+          <label class="builder-search">
+            <span class="sr-only">Search available players</span>
+            <input id="builder-search" type="search" placeholder="Search players">
+          </label>
+          <div class="custom-player-control">
+            <button
+              class="secondary-button custom-player-toggle"
+              id="custom-player-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="custom-player-form"
+            ><span aria-hidden="true">+</span> Add another player</button>
+            <form class="custom-player-form" id="custom-player-form" hidden>
+              <label for="custom-player-name">Player name</label>
+              <div class="custom-player-entry">
+                <input
+                  id="custom-player-name"
+                  type="text"
+                  minlength="2"
+                  maxlength="60"
+                  autocomplete="off"
+                  placeholder="Example: Wayne Rooney"
+                  required
+                >
+                <button class="primary-button" type="submit">Add</button>
+              </div>
+              <button class="text-button custom-player-cancel" id="custom-player-cancel" type="button">Cancel</button>
+              <p class="form-status" id="custom-player-status" aria-live="polite"></p>
+            </form>
+          </div>
+          <div class="player-pool" id="player-pool"></div>
+        </div>
+
+        <div class="ranking-builder">
+          <div class="workspace-title">
+            <h3>Your ranking</h3>
+            <button class="text-button danger-text" id="clear-list-button" type="button">Clear</button>
+          </div>
+          <p class="builder-empty" id="builder-empty">Add a player to begin. Use the arrow buttons or drag the blocks to change the order.</p>
+          <ol class="ranking-blocks" id="ranking-blocks"></ol>
+        </div>
+      </div>
+
+      <div class="publish-row">
+        <label class="public-control">
+          <input id="public-list" type="checkbox" checked>
+          <span>Show this list in the community feed</span>
+        </label>
+        <button class="primary-button publish-button" id="publish-button" type="button">Publish list</button>
+      </div>
+      <p class="form-status" id="publish-status" aria-live="polite"></p>
+    </section>
+
+    <section class="community-feed-section" aria-labelledby="community-lists-title">
+      <div class="feed-heading">
+        <div>
+          <p class="section-label">Latest submissions</p>
+          <h2 id="community-lists-title">Community lists</h2>
+        </div>
+        <button class="secondary-button" id="refresh-lists-button" type="button">Refresh</button>
+      </div>
+      <div class="community-lists" id="community-lists"></div>
+      <p class="feed-empty" id="feed-empty">No public lists yet. The first one can be yours.</p>
+      <p class="form-status" id="feed-status" aria-live="polite"></p>
+    </section>
+
+    <section class="feedback-section" aria-labelledby="feedback-title">
+      <div>
+        <p class="section-label">Help improve the site</p>
+        <h2 id="feedback-title">Send feedback</h2>
+        <p>Report a problem, suggest a player-page correction, or share an idea. Feedback is visible only to the site owner.</p>
+      </div>
+
+      <form class="feedback-form" id="feedback-form">
+        <label>
+          <span>Category</span>
+          <select id="feedback-category">
+            <option>Idea</option>
+            <option>Bug</option>
+            <option>Player information</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>
+          <span>Your feedback</span>
+          <textarea id="feedback-message" minlength="10" maxlength="1000" rows="5" required></textarea>
+        </label>
+        <button class="primary-button" type="submit">Send feedback</button>
+        <p class="form-status" id="feedback-status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>The Football 50</strong>
+      <span>Rankings from the community.</span>
+    </div>
+    <a href="index.html">Return to the original list</a>
+  </footer>
+
+  <script src="profile-data.js" defer></script>
+  <script src="supabase-config.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="community.js" defer></script>
+</body>
+</html>

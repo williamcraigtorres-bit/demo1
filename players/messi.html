@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lionel Messi Profile</title>
+  <link rel="stylesheet" href="../style.css">
+
+  <style>
+    .profile-page {
+      background: #f3f5f2;
+      min-height: 100vh;
+    }
+
+    .profile-hero {
+      min-height: 75vh;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: end;
+      gap: 36px;
+      padding: 42px;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(3, 24, 18, 0.92), rgba(3, 24, 18, 0.45)),
+        url("../Messi.webp");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .back-link {
+      display: inline-block;
+      color: #f2c94c;
+      font-weight: 800;
+      text-decoration: none;
+      margin-bottom: 28px;
+    }
+
+    .profile-rank {
+      display: inline-block;
+      background: #f2c94c;
+      color: #10251c;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .profile-hero h1 {
+      font-size: 72px;
+      line-height: 0.95;
+      margin: 0 0 18px;
+    }
+
+    .profile-summary {
+      max-width: 660px;
+      font-size: 21px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .hero-details {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-details p {
+      margin: 12px 0;
+      font-size: 18px;
+    }
+
+    .profile-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 42px 24px 70px;
+    }
+
+    .section {
+      background: white;
+      border-radius: 8px;
+      padding: 28px;
+      margin-bottom: 26px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .section h2 {
+      margin: 0 0 18px;
+      font-size: 30px;
+    }
+
+    .section p,
+    .section li {
+      color: #444;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    .facts-grid,
+    .stats-grid,
+    .skills-grid,
+    .videos-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .facts-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .fact,
+    .stat,
+    .skill {
+      background: #f3f5f2;
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .fact span,
+    .stat span {
+      display: block;
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 6px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .fact strong,
+    .stat strong {
+      color: #111;
+      font-size: 22px;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat strong {
+      color: #0b5a3c;
+      font-size: 34px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .club-row {
+      display: grid;
+      grid-template-columns: 180px 1fr 160px;
+      gap: 16px;
+      align-items: center;
+      padding: 16px;
+      background: #f3f5f2;
+      border-radius: 8px;
+    }
+
+    .club-row strong {
+      font-size: 20px;
+    }
+
+    .club-row span {
+      color: #555;
+    }
+
+    .trophy-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .trophy-list li {
+      background: #f3f5f2;
+      padding: 14px 16px;
+      border-left: 5px solid #f2c94c;
+      border-radius: 6px;
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .skill strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #0b5a3c;
+      font-size: 19px;
+    }
+
+    .moments {
+      display: grid;
+      gap: 14px;
+    }
+
+    .moment {
+      padding: 16px;
+      border-left: 5px solid #0b5a3c;
+      background: #f3f5f2;
+      border-radius: 6px;
+    }
+
+    .videos-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    iframe {
+      width: 100%;
+      height: 315px;
+      border: none;
+      border-radius: 8px;
+    }
+
+    .video-card {
+      overflow: hidden;
+      background: #f3f5f2;
+      border-radius: 8px;
+    }
+
+    .video-card iframe {
+      display: block;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .video-copy {
+      padding: 16px 18px 18px;
+    }
+
+    .video-copy h3 {
+      margin: 0 0 6px;
+      font-size: 19px;
+    }
+
+    .video-copy a {
+      color: #0b5a3c;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .video-copy a:hover {
+      text-decoration: underline;
+    }
+
+    .profile-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .profile-nav a {
+      background: #0b5a3c;
+      color: white;
+      text-decoration: none;
+      padding: 14px 18px;
+      border-radius: 7px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 900px) {
+      .profile-hero {
+        grid-template-columns: 1fr;
+        padding: 32px 22px;
+      }
+
+      .profile-hero h1 {
+        font-size: 48px;
+      }
+
+      .facts-grid,
+      .stats-grid,
+      .skills-grid,
+      .videos-grid,
+      .trophy-list {
+        grid-template-columns: 1fr;
+      }
+
+      .club-row {
+        grid-template-columns: 1fr;
+      }
+    }
+    .trophy-cabinet {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #111;
+}
+
+.trophy-cabinet img {
+  width: 100%;
+  display: block;
+}
+
+.trophy-spot {
+  position: absolute;
+  border: 2px solid transparent;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.trophy-spot:hover {
+  border-color: #f2c94c;
+  background: rgba(242, 201, 76, 0.18);
+  box-shadow: 0 0 24px rgba(242, 201, 76, 0.9);
+}
+
+.trophy-spot::after {
+  content: attr(data-trophy);
+  position: absolute;
+  left: 50%;
+  bottom: 105%;
+  transform: translateX(-50%);
+  background: #10251c;
+  color: white;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.trophy-spot:hover::after {
+  opacity: 1;
+}
+.scorecard {
+  display: grid;
+  gap: 16px;
+}
+
+.score-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 70px;
+  gap: 14px;
+  align-items: center;
+  background: #f3f5f2;
+  padding: 14px;
+  border-radius: 8px;
+}
+
+.score-row span {
+  font-weight: 800;
+}
+
+.score-row strong {
+  color: #0b5a3c;
+}
+
+.score-bar {
+  height: 12px;
+  background: #dce5df;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.score-bar div {
+  height: 100%;
+  background: linear-gradient(90deg, #0b5a3c, #f2c94c);
+  border-radius: 999px;
+}
+
+@media (max-width: 700px) {
+  .score-row {
+    grid-template-columns: 1fr;
+  }
+}
+  </style>
+  <link rel="stylesheet" href="../profile.css">
+  <style>
+    .messi-videos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 900px) {
+      .messi-videos {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="profile-page">
+
+    <section class="profile-hero">
+      <div>
+        <a class="back-link" href="../index.html">← Back to Top 50</a>
+        <div class="profile-rank">#1</div>
+        <h1>Lionel Messi</h1>
+        <p class="profile-summary">
+          Lionel Messi is football's greatest player, famous for his dribbling,
+          passing, finishing, vision, and unmatched consistency across nearly two decades.
+        </p>
+      </div>
+
+      <div class="hero-details">
+        <p><strong>Country:</strong> Argentina</p>
+        <p><strong>Position:</strong> Forward / Playmaker</p>
+        <p><strong>Main Clubs:</strong> Barcelona, PSG, Inter Miami</p>
+        <p><strong>Era:</strong> 2004-present</p>
+        <p><strong>Known For:</strong> Dribbling, playmaking, goals, free kicks</p>
+      </div>
+    </section>
+
+    <div class="profile-content">
+
+      <div class="profile-overview">
+        <div class="profile-overview-main">
+
+      <section class="section">
+        <h2>Quick Facts</h2>
+        <div class="facts-grid">
+          <div class="fact">
+            <span>Full Name</span>
+            <strong>Lionel Andrés Messi</strong>
+          </div>
+          <div class="fact">
+            <span>Born</span>
+            <strong>June 24, 1987</strong>
+          </div>
+          <div class="fact">
+            <span>National Team</span>
+            <strong>Argentina</strong>
+          </div>
+          <div class="fact">
+            <span>Preferred Foot</span>
+            <strong>Left</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Career Story</h2>
+        <p>
+          Messi joined Barcelona as a young teenager and became the face of one of the greatest
+          club teams ever. His combination of close control, vision, passing, finishing, and calmness
+          made him almost impossible to stop. After years of club dominance, he completed his
+          international legacy by winning the Copa América and the 2022 FIFA World Cup with Argentina.
+        </p>
+      </section>
+
+        </div>
+
+        <aside class="profile-side-photos" aria-label="Lionel Messi photos">
+          <figure class="profile-side-photo">
+            <img src="../Messi2.png" alt="Lionel Messi career moment" loading="lazy">
+          </figure>
+          <figure class="profile-side-photo">
+            <img src="../Messi3.png" alt="Lionel Messi playing football" loading="lazy">
+          </figure>
+        </aside>
+      </div>
+
+      <section class="section">
+        <h2>Club History</h2>
+        <div class="timeline">
+          <div class="club-row">
+            <strong>Barcelona</strong>
+            <span>His legendary prime years, full of records, trophies, goals, and assists.</span>
+            <span>2004-2021</span>
+          </div>
+          <div class="club-row">
+            <strong>Paris Saint-Germain</strong>
+            <span>A shorter chapter in France, adding league titles and another stage of his career.</span>
+            <span>2021-2023</span>
+          </div>
+          <div class="club-row">
+            <strong>Inter Miami</strong>
+            <span>Brought global attention to MLS and continued creating magic late in his career.</span>
+            <span>2023-present</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Stats Snapshot</h2>
+        <div class="stats-grid">
+          <div class="stat">
+            <span>Official Senior Goals</span>
+            <strong>919</strong>
+          </div>
+          <div class="stat">
+            <span>Career Assists</span>
+            <strong>420</strong>
+          </div>
+          <div class="stat">
+            <span>Ballon d'Ors</span>
+            <strong>8</strong>
+          </div>
+          <div class="stat">
+            <span>World Cups</span>
+            <strong>1</strong>
+          </div>
+        </div>
+        <p class="stats-note">Official senior club and senior international goals. Youth, exhibition, and unofficial matches are excluded. Total checked on August 1, 2026.</p>
+      </section>
+
+      <section class="section">
+        <h2>Trophy Cabinet</h2>
+      
+        <div class="trophy-cabinet">
+          <img src="../messi-trophies.jpg" alt="Lionel Messi trophy cabinet">
+      
+          <button class="trophy-spot" style="left: 31.5%; top: 6%; width: 5%; height: 11%;" data-trophy="FIFA World Cup"></button>
+
+<button class="trophy-spot" style="left: 20.5%; top: 7%; width: 5.3%; height: 10%;" data-trophy="Copa América"></button>
+
+<button class="trophy-spot" style="left: 3%; top: 19%; width: 23%; height: 17%;" data-trophy="UEFA Champion Leagues"></button>
+
+<button class="trophy-spot" style="left: 2%; top: 35%; width: 42%; height: 16%;" data-trophy="Spanish Super Cups"></button>
+
+<button class="trophy-spot" style="left: 3%; top: 69%; width: 45%; height: 14%;" data-trophy="La Liga titles"></button>
+
+<button class="trophy-spot" style="left: 55%; top: 38%; width: 40%; height: 12%;" data-trophy="Ballon d'Or awards"></button>
+
+<button class="trophy-spot" style="left: 56%; top: 54%; width: 34%; height: 15%;" data-trophy="European Golden Shoes"></button>
+
+<button class="trophy-spot" style="left: 71%; top: 82%; width: 5%; height: 9%;" data-trophy="The Best FIFA Men's Player"></button>
+
+<button class="trophy-spot" style="left: 78%; top: 82%; width: 5%; height: 9%;" data-trophy="UEFA Men's Player awards"></button>
+
+<button class="trophy-spot" style="left: 84%; top: 82%; width: 5%; height: 9%;" data-trophy="Champions League Golden Ball"></button>
+
+<button class="trophy-spot" style="left: 55%; top: 6%; width: 40%; height: 12%;" data-trophy="Individual Awards"></button>
+
+<button class="trophy-spot" style="left: 2%; top: 51%; width: 38%; height: 16%;" data-trophy="Copa Del Rey"></button>
+
+<button class="trophy-spot" style="left: 26.5%; top: 8%; width: 4%; height: 12%;" data-trophy="Finalissima"></button>      
+
+<button class="trophy-spot" style="left: 35%; top: 19%; width: 13%; height: 17%;" data-trophy="Club World Cups"></button> 
+
+<button class="trophy-spot" style="left: 82%; top: 81%; width: 5%; height: 9%;" data-trophy="UEFA awards"></button>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Signature Skills</h2>
+        <div class="skills-grid">
+          <div class="skill">
+            <strong>Dribbling</strong>
+            <p>Low center of gravity, tiny touches, and elite balance made him impossible to mark.</p>
+          </div>
+          <div class="skill">
+            <strong>Playmaking</strong>
+            <p>Messi could create chances from anywhere with through balls, cutbacks, and switches.</p>
+          </div>
+          <div class="skill">
+            <strong>Finishing</strong>
+            <p>Clinical with his left foot, especially when cutting inside or placing shots low.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Iconic Moments</h2>
+        <div class="moments">
+          <div class="moment">
+            <strong>2022 World Cup Win</strong>
+            <p>Led Argentina to the trophy that completed his international legacy.</p>
+          </div>
+          <div class="moment">
+            <strong>Barcelona Prime</strong>
+            <p>Dominated European football with Barcelona during one of the greatest club eras ever.</p>
+          </div>
+          <div class="moment">
+            <strong>El Clásico Performances</strong>
+            <p>Produced unforgettable goals and assists against Real Madrid across many seasons.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>YouTube Highlights</h2>
+        <div class="videos-grid messi-videos">
+          <article class="video-card">
+            <iframe
+              src="https://www.youtube.com/embed/7RJk23Wr_xs"
+              title="Lionel Messi FIFA World Cup goals and assists"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <div class="video-copy">
+              <h3>World Cup Goals and Assists</h3>
+              <a href="https://www.youtube.com/watch?v=7RJk23Wr_xs" target="_blank" rel="noopener noreferrer">Open the official FIFA video on YouTube</a>
+            </div>
+          </article>
+
+          <article class="video-card">
+            <iframe
+              src="https://www.youtube.com/embed/It4YOYzEaVY"
+              title="Lionel Messi top ten FC Barcelona goals"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
+            <div class="video-copy">
+              <h3>Ten Greatest Barcelona Goals</h3>
+              <a href="https://www.youtube.com/watch?v=It4YOYzEaVY" target="_blank" rel="noopener noreferrer">Open the official Barcelona video on YouTube</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Legacy Scorecard</h2>
+      
+        <div class="scorecard">
+          <div class="score-row">
+            <span>Dribbling</span>
+            <div class="score-bar"><div style="width: 100%;"></div></div>
+            <strong>10/10</strong>
+          </div>
+      
+          <div class="score-row">
+            <span>Playmaking</span>
+            <div class="score-bar"><div style="width: 100%;"></div></div>
+            <strong>10/10</strong>
+          </div>
+      
+          <div class="score-row">
+            <span>Finishing</span>
+            <div class="score-bar"><div style="width: 96%;"></div></div>
+            <strong>9.6/10</strong>
+          </div>
+      
+          <div class="score-row">
+            <span>Consistency</span>
+            <div class="score-bar"><div style="width: 100%;"></div></div>
+            <strong>10/10</strong>
+          </div>
+      
+          <div class="score-row">
+            <span>Big Game Impact</span>
+            <div class="score-bar"><div style="width: 98%;"></div></div>
+            <strong>9.8/10</strong>
+          </div>
+        </div>
+      </section>
+      
+      
+      <section class="section">
+        <h2>Why He Ranks #1 All Time</h2>
+        <p>
+            I put Lionel Messi at number one because I think he's the greatest soccer player ever. He's won almost everything there is to win, including the World Cup, and has been one of the best players in the world for a long time. What stands out to me is how he can score, create chances for his teammates, and dribble past defenders like no one else. He's always been consistent and has delivered in big games. There are a lot of great players in football history, but I think Messi has done enough to deserve the number one spot.
+        </p>
+      </section>
+
+      <div class="profile-nav">
+        <a href="../index.html">← Back to Gallery</a>
+        <a href="ronaldo.html">Next: Cristiano Ronaldo →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="../profile.js"></script>
+</body>
+</html>
