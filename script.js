@@ -462,15 +462,23 @@ function sortPlayers(list) {
   return sorted.sort((a, b) => a.rank - b.rank);
 }
 
+function getRankTier(rank) {
+  if (rank <= 3) return "spectral";
+  if (rank <= 10) return "blue";
+  if (rank <= 20) return "magenta";
+  if (rank <= 35) return "teal";
+  return "coral";
+}
+
 function displayPlayers(list, showPodium) {
   const fragment = document.createDocumentFragment();
   playersContainer.innerHTML = "";
 
   list.forEach(player => {
     const card = document.createElement("a");
-    card.className = showPodium && player.rank <= 3
-      ? "player-card player-card--podium"
-      : "player-card";
+    const cardClasses = ["player-card", `player-card--tier-${getRankTier(player.rank)}`];
+    if (showPodium && player.rank <= 3) cardClasses.push("player-card--podium");
+    card.className = cardClasses.join(" ");
     card.href = player.profile;
     card.setAttribute(
       "aria-label",

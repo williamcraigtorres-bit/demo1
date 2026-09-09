@@ -8,7 +8,7 @@
     content="An all-time ranking of the 50 greatest football players."
   >
   <title>The Football 50 | Greatest Players of All Time</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260908">
 </head>
 <body class="home-page">
   <a class="skip-link" href="#ranking">Skip to the ranking</a>
@@ -104,6 +104,14 @@
         <button id="reset-filters" class="reset-filters" type="button" hidden>Reset filters</button>
       </div>
 
+      <div class="rank-tiers" aria-label="Ranking color guide">
+        <span class="rank-tier rank-tier--spectral"><i aria-hidden="true"></i>Top 3</span>
+        <span class="rank-tier rank-tier--blue"><i aria-hidden="true"></i>Ranks 4–10</span>
+        <span class="rank-tier rank-tier--magenta"><i aria-hidden="true"></i>Ranks 11–20</span>
+        <span class="rank-tier rank-tier--teal"><i aria-hidden="true"></i>Ranks 21–35</span>
+        <span class="rank-tier rank-tier--coral"><i aria-hidden="true"></i>Ranks 36–50</span>
+      </div>
+
       <div class="players" id="players"></div>
 
       <div id="no-results" class="no-results" hidden>
@@ -139,6 +147,6 @@
     &uarr;
   </button>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20260908"></script>
 </body>
 </html>
